@@ -21,6 +21,7 @@
       novalidate
       class="md-layout"
       @submit.prevent="ajouterRestaurant($event)"
+      autocomplete="off"
     >
       <md-card class="md-layout-item md-size-50 md-small-size-100">
         <md-card-header>
