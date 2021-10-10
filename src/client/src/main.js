@@ -8,6 +8,8 @@ import VueRouter from 'vue-router'
 import ListeDesRestaurants from './components/ListeDesRestaurants.vue'
 import HelloWorld from './components/HelloWorld.vue'
 import Restaurant from './components/Restaurant.vue'
+import AjoutRestau from './components/AjoutRestau.vue'
+
 
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
@@ -21,7 +23,11 @@ const router = new VueRouter({
     },
     {
       path: '/restaurant/:r',
-      component: Restaurant
+      component: Restaurant,
+    },
+    {
+      path: '/ajout',
+      component: AjoutRestau,
     },
     {
       path: '/hello',

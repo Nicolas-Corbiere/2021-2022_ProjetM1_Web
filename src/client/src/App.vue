@@ -3,6 +3,7 @@
     <router-link to="/">[Home]</router-link>
     <router-link to="/restaurant">[Détail d'un restaurant]</router-link>
     <router-link to="/hello">[HelloWorld]</router-link>
+    <router-link to="/ajout">[Ajouter un restaurant]</router-link>    
     <router-view></router-view>
   </div>
 </template>
