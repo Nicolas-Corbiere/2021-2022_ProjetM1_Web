@@ -1,58 +1,70 @@
 <template>
-  <div>
-    <h2>{{msg}}</h2>
-    <form @submit.prevent="ajouterRestaurant($event)">
-        <label>
-            Nom : <input name="nom" type="text" required v-model="nom">
-        </label>
-        <label>
-            Cuisine : <input name="cuisine" type="text" required v-model="cuisine">
-        </label>
+    <div class="bloc">
+        <div class="bloc">
 
-        <button class="md-raised">Ajouter</button>
-    </form>
+            <h2>{{msg}}</h2>
+            <router-link  :to="'/'"><img src="../assets/miageLogo.png"></router-link>
+            <div id="filtre">
+                <div class="md-layout md-gutter">
+                    <div class="md-layout-item">
+                        <md-field>
+                            <label for="filtre">filtre</label>
+                            <md-select name="filtre" id="filtre" v-model="filtre" md-dense :disabled="sending">
+                                <md-option value="name">Name</md-option>
+                                <md-option value="cuisine">Cuisine</md-option>
+                                <md-option value="borough">Ville</md-option>
+                            </md-select>
+                        </md-field>
+                    </div>
+                </div>
+                <input @input="chercherRestaurants()" type="text" v-model="nomRestauRecherche">
+            </div>
+            
+        </div>
+        <div class="bloc">
+            <h1>Nombre de restaurants : {{nbRestaurantsTotal}}</h1>
+        
+            <p>Nb de pages total : {{nbPagesTotal}}</p>
+            <p>Nb restaurants par page : 
+                <input 
+                    @change="getRestaurantsFromServer()"
+                    type="range"  min=2 max=1000 v-model="pagesize"
+                >{{pagesize}}
+            </p>
 
-    <h1>Nombre de restaurants : {{nbRestaurantsTotal}}</h1>
-    <p>Chercher par nom : <input 
-                            @input="chercherRestaurants()" 
-                            type="text" 
-                            v-model="nomRestauRecherche"
-                          ></p>
-    <p>Nb de pages total : {{nbPagesTotal}}</p>
-    <p>Nb restaurants par page : 
-        <input 
-            @change="getRestaurantsFromServer()"
-            type="range"  min=2 max=1000 v-model="pagesize"
-        >{{pagesize}}
-    </p>
-    <md-button class="md-raised" :disabled="page===0" @click="pagePrecedente()">Précédent</md-button>
-    <md-button class="md-raised" :disabled="page===nbPagesTotal" @click="pageSuivante()">Suivant</md-button>
-     &nbsp;Page courante : {{page}}
-    <br>
-    <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
+            &nbsp;Page courante : {{page}}
+            <br>
+        </div>
+        <div class="bloc">
+            <md-button id="precedent" class="md-raised" :disabled="page===0" @click="pagePrecedente()">Page précédente</md-button>
+            <md-button id="suivant" class="md-raised" :disabled="page===nbPagesTotal" @click="pageSuivante()">Page suivante</md-button>
+            <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
 
-        <md-table-row>
-            <md-table-head>Nom</md-table-head>
-            <md-table-head>Cuisine </md-table-head>
-        </md-table-row>
+                <md-table-row>
+                    <md-table-head>Nom</md-table-head>
+                    <md-table-head>Cuisine </md-table-head>
+                </md-table-row>
 
-         <md-table-row  
-            slot="md-table-row" slot-scope="{ item, index }"
-            :style="{backgroundColor:getColor(index)}"
-            :class="{bordureRouge:(index === 2)}">   
-            <md-table-cell md-label="Name" md-sort-by="name">{{item.name}}</md-table-cell>
-            <md-table-cell md-label="Cuisine" md-sort-by="cuisine"> {{item.cuisine}}</md-table-cell>
-            <md-table-cell md-label="Action">
-                <router-link  :to="'/restaurant/' + item._id">[Détail d'un restaurant]</router-link>
-            </md-table-cell>
-            <md-table-cell md-label="Action">
-                <md-button class="md-raised" @click="supprimerRestaurant(item)">Supprimer</md-button>
-            </md-table-cell>
-
-        </md-table-row>
-
-    </md-table>
-</div>
+                <md-table-row  
+                    slot="md-table-row" slot-scope="{ item, index }"
+                    :style="{backgroundColor:getColor(index)}"
+                    :class="{bordureRouge:(index === 2)}">   
+                    <md-table-cell md-label="Name" md-sort-by="name">{{item.name}}</md-table-cell>
+                    <md-table-cell md-label="Cuisine" md-sort-by="cuisine"> {{item.cuisine}}</md-table-cell>
+                    <md-table-cell md-label="ville" md-sort-by="Ville"> {{item.borough}}</md-table-cell>
+                    <md-table-cell md-label="Détails">
+                        <router-link  :to="'/restaurant/' + item._id"><img id="details" src="../assets/details.png"></router-link>
+                    </md-table-cell>
+                    <md-table-cell md-label="Supprimer">
+                        <img id="delete" src="../assets/delete.png" @click="supprimerRestaurant(item)">
+                    </md-table-cell>
+                </md-table-row>
+                
+            </md-table>
+            
+        </div>
+    </div>
+               
 </template>
 
 <script>
@@ -171,6 +183,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1{
+    text-align:center;
     background-color:yellow;
 }
 h3 {
@@ -186,5 +199,41 @@ li {
 }
 a {
   color: #42b983;
+}
+
+#delete{
+    height:20px;
+    width:20px;
+}
+#details{
+    height:20px;
+    width:20px;
+}
+#precedent{
+    float:left;
+    margin-left:100px;
+    border: 2px solid black;
+}
+#suivant{
+    float:right;
+    margin-right:100px;
+    border: 2px solid black;
+}
+
+#search{
+    float:right;
+}
+.bloc{
+    border: 2px solid black;
+    padding-left:10px;
+    padding-top:10px;
+    padding-right:10px;
+    padding-bottom:10px;
+}
+#filtre{
+    float:right;
+    padding-right:200px;
+    height:100px;
+    width:20px;
 }
 </style>
