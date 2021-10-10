@@ -1,11 +1,19 @@
 <template>
   <div>
     <h1>Détail du restaurant qui a pour id : {{id}}</h1>
-    <ul>
-        <li>Nom : {{restaurant.name}}</li>
-        <li>Cusine : {{restaurant.cuisine}}</li>
-        <li>Ville : {{restaurant.borough}}</li>
-    </ul>
+
+    <p> Nom : {{restaurant.name}} &nbsp;&nbsp;&nbsp;&nbsp;
+        Cusine : {{restaurant.cuisine}} &nbsp;&nbsp;&nbsp;&nbsp;
+        Ville : {{restaurant.borough}} </p>
+
+    <div class="phone-viewport" id="photo">
+      <md-bottom-bar md-sync-route>
+        <md-bottom-bar-item @click="changeBG()" exact md-label="Home" md-icon="home"></md-bottom-bar-item>
+        <md-bottom-bar-item md-label="Posts" md-icon="/assets/icon-whatshot.svg"></md-bottom-bar-item>
+        <md-bottom-bar-item md-label="Favorites" md-icon="favorite"></md-bottom-bar-item>
+      </md-bottom-bar>
+    </div>
+
   </div>
 </template>
 
@@ -38,6 +46,10 @@ export default {
       })
   },
   methods : {
+      changeBG() {
+          let elem = document.getElementById('photo');
+          elem.style.background = "red"
+      }
   }
 }
 </script>
@@ -45,4 +57,13 @@ export default {
 
 <style>
 
+.phone-viewport {
+    width: 500px;
+    height: 500px;
+    display: inline-flex;
+    align-items: flex-end;
+    overflow: hidden;
+    border: 1px solid rgba(#000, .26);
+    background: rgba(#000, .06);
+  }
 </style>
