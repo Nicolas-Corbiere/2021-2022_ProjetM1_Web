@@ -17,7 +17,7 @@
                         </md-field>
                     </div>
                 </div>
-                <input @input="chercherRestaurants()" type="text" v-model="nomRestauRecherche">
+                <input @input="chercherRestaurants()" type="text" v-model="restauRecherche">
             </div>
             
         </div>
@@ -81,7 +81,8 @@ export default {
         pagesize:10,
         nbPagesTotal:0,
         msg:"",
-        nomRestauRecherche:""
+        restauRecherche:"",
+        filtre:""
     }    
   },
   mounted() {
@@ -103,8 +104,18 @@ export default {
                 let url = "http://localhost:8080/api/restaurants?";
                 url += "page=" + this.page;
                 url += "&pagesize=" + this.pagesize;
-                url += "&name=" + this.nomRestauRecherche;
-
+                if(this.filtre == "cuisine"){
+                    url += "&cuisine=" + this.restauRecherche;
+                }
+                else if(this.filtre =="borough"){
+                    url += "&borough=" + this.restauRecherche;
+                }
+                else{
+                    url += "&name=" + this.restauRecherche;
+                }
+                console.log("url :", url);
+                console.log("filtre :", this.filtre);
+                console.log("restauRecherche", this.restauRecherche);
                 fetch(url)
                     .then((responseJSON) => { //arrow function, conserve le bon "this"
                         //la réponse est en JSON, on la convertit avec la ligne suivante
