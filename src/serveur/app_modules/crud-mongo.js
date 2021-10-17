@@ -43,11 +43,11 @@ exports.countRestaurants = function(name,callback) {
     });
 };
 
-exports.findRestaurants = function(page, pagesize, name, callback) {
+exports.findRestaurants = function(page, pagesize, name,filtre, callback) {
     MongoClient.connect(url, function(err, client) {
 
 			var db = client.db(dbName);
-
+			console.log("filtre " + filtre)
 			console.log("db " + db)
         if(!err){
 			if(name == ''){
@@ -62,10 +62,33 @@ exports.findRestaurants = function(page, pagesize, name, callback) {
 							.then(rep=>callback(arr,rep))
 					});
 			}
-			else{
-					let query = {
-						"name" : {$regex:".*"+name+".*",$options:"i"}
+			else{	
+					let query;
+					if(filtre === "name") {
+						query = {
+							//TODO: recupe la val filtre
+							"name" : {$regex:".*"+name+".*",$options:"i"}						
+						}
 					}
+					else if(filtre === "cuisine") {
+						query = {
+							//TODO: recupe la val filtre
+							"cuisine" : {$regex:".*"+name+".*",$options:"i"}						
+						}
+					}
+					else if(filtre === "borough") {
+						query = {
+							//TODO: recupe la val filtre
+							"borough" : {$regex:".*"+name+".*",$options:"i"}						
+						}
+					}
+					
+					/*let query = {
+						//TODO: recupe la val filtre
+						//"name" : {$regex:".*"+name+".*",$options:"i"}						
+						filtre : {$regex:".*"+name+".*",$options:"i"}
+
+					}*/
                     db.collection('restaurants')
                         .find(query)
                         .skip(page*pagesize)

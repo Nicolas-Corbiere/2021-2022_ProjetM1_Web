@@ -8,9 +8,9 @@
 
     <div class="phone-viewport" id="photo">
       <md-bottom-bar md-sync-route>
-        <md-bottom-bar-item @click="changeBG()" exact md-label="Home" md-icon="home"></md-bottom-bar-item>
-        <md-bottom-bar-item md-label="Posts" md-icon="/assets/icon-whatshot.svg"></md-bottom-bar-item>
-        <md-bottom-bar-item md-label="Favorites" md-icon="favorite"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="changeBG(1)" exact md-label="Map" md-icon="map"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="changeBG(2)" md-label="Image" md-icon="image"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="changeBG(3)" md-label="Menu" md-icon="restaurant_menu"></md-bottom-bar-item>
       </md-bottom-bar>
     </div>
 
@@ -46,9 +46,23 @@ export default {
       })
   },
   methods : {
-      changeBG() {
+      changeBG(number) {
           let elem = document.getElementById('photo');
+
+        if (number === 1) {
+          elem.style.backgroundImage = "";
           elem.style.background = "red"
+        }
+        else if (number === 2){
+          elem.style.backgroundImage = "url('" + this.restaurant.img + "')"
+          elem.style.background = ""
+          console.log(this.restaurant.img)
+        }
+        else {
+          elem.style.backgroundImage = "";
+          elem.style.background = "red"
+        }
+          
       }
   }
 }
@@ -56,7 +70,9 @@ export default {
 
 
 <style>
-
+.photo {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/10/Devanture_du_restaurant_H%C3%A9l%C3%A8ne_Darroze.jpg');
+}
 .phone-viewport {
     width: 500px;
     height: 500px;
