@@ -17,8 +17,9 @@
 </script>
 
 <style>
-button:active {
-  background-color: #33E2FF;
+
+button:hover {
+background-color: #33E2FF;
 }
 
 button{
