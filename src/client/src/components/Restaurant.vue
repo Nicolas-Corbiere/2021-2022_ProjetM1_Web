@@ -40,25 +40,27 @@
       </md-bottom-bar>
     </div>
 
-    <div class="wrapper">
-      <ejs-maps :zoomSettings="zoomSettings"  :centerPosition= 'centerPosition'>
-        <e-layers>
-          <e-layer :layerType="layerType"> </e-layer>
-        </e-layers>
-      </ejs-maps>
+  <div id="top_div" style="height: 100%">
+      <v-map :zoom="zoom" :center="center" style="height: 1000px; width: 1000px">
+        <v-tilelayer :url="url" :attribution="attribution"></v-tilelayer>
+        <v-marker :lat-lng="marker"></v-marker>       
+      </v-map>
     </div>
+    
   </div>
 </template>
 
 
 <script>
-import Vue from "vue";
-import { MapsPlugin /*, MapsComponent*/, Zoom } from "@syncfusion/ej2-vue-maps";
-//import { world_map } from './world-map.js';
-Vue.use(MapsPlugin);
+import Vue2Leaflet from 'vue2-leaflet';
 
 export default {
   name: "Restaurant",
+  components: {
+    'v-map': Vue2Leaflet.Map,
+    'v-tilelayer' :Vue2Leaflet.TileLayer,
+    'v-marker': Vue2Leaflet.Marker
+  },
   props: {},
   computed: {
     id() {
@@ -68,20 +70,14 @@ export default {
   data: function () {
     return {
       restaurant: null,
-      zoomSettings: {
-        enable: true,
-        //toolBars: ["Zoom", "ZoomIn", "ZoomOut", "Pan", "Reset"],
-        zoomFactor: 4
-      },
-      centerPosition: {
-          latitude: 0,
-          longitude: 0,
-       },
-      layerType: "OSM",
+      zoom: 13,
+      latitude: 0,
+      longitude: 0,
+        center: [this.latitude, this.longitude],
+        url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        marker: Vue2Leaflet.latLng(this.latitude, this.longitude),
     };
-  },
-  provide: {
-    maps: [Zoom],
   },
   mounted() {
     console.log("Avant affichage, on pourra faire un fetch...");
@@ -142,4 +138,6 @@ export default {
   max-width: 400px;
   margin: 0 auto;
 }
+@import "~leaflet/dist/leaflet.css";
+
 </style>
