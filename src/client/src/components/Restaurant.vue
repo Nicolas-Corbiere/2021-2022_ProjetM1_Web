@@ -2,15 +2,15 @@
   <div>
     <h1>Détail du restaurant qui a pour id : {{id}}</h1>
 
-    <p> Nom : {{restaurant.name}} &nbsp;&nbsp;&nbsp;&nbsp;
-        Cusine : {{restaurant.cuisine}} &nbsp;&nbsp;&nbsp;&nbsp;
-        Ville : {{restaurant.borough}} </p>
+    <p class="informarion"> <b>Nom</b> : {{restaurant.name}} &nbsp;&nbsp;&nbsp;&nbsp;
+        <b> Cusine</b> : {{restaurant.cuisine}} &nbsp;&nbsp;&nbsp;&nbsp;
+        <b> Ville </b> : {{restaurant.borough}} </p>
 
-    <div class="phone-viewport" id="photo">
+    <div class="phone-viewport" id="photo" ref="photo" :style="{ backgroundImage: 'url(\'' + restaurant.img + '\')' }">
       <md-bottom-bar md-sync-route>
-        <md-bottom-bar-item @click="changeBG(1)" exact md-label="Map" md-icon="map"></md-bottom-bar-item>
-        <md-bottom-bar-item @click="changeBG(2)" md-label="Image" md-icon="image"></md-bottom-bar-item>
-        <md-bottom-bar-item @click="changeBG(3)" md-label="Menu" md-icon="restaurant_menu"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="changeBG(1)" class="cadre" exact md-label="Image" md-icon="image" ></md-bottom-bar-item>
+        <md-bottom-bar-item @click="changeBG(2)" class="cadre"  md-label="Map" md-icon="map"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="changeBG(3)" class="cadre"  md-label="Menu" md-icon="restaurant_menu"></md-bottom-bar-item>
       </md-bottom-bar>
     </div>
 
@@ -33,7 +33,7 @@ export default {
           restaurant: null
       }
   },
-  mounted(){
+  mounted(){     
       console.log("Avant affichage, on pourra faire un fetch...");
       console.log("ID = " + this.id)
       let url = "http://localhost:8080/api/restaurants/" + this.id;
@@ -41,7 +41,6 @@ export default {
       .then(reponse => {
           return reponse.json();
       }).then(data =>{
-          console.log(data.restaurant.name)
           this.restaurant = data.restaurant;
       })
   },
@@ -49,20 +48,24 @@ export default {
       changeBG(number) {
           let elem = document.getElementById('photo');
 
-        if (number === 1) {
-          elem.style.backgroundImage = "";
-          elem.style.background = "red"
-        }
-        else if (number === 2){
-          elem.style.backgroundImage = "url('" + this.restaurant.img + "')"
-          elem.style.background = ""
-          console.log(this.restaurant.img)
-        }
-        else {
-          elem.style.backgroundImage = "";
-          elem.style.background = "red"
-        }
+          this.resetPhoto(elem)
+          if (number === 1) {
+            this.setImage(elem)
+          }
+          else if (number === 2){
+            elem.style.background = "red"
+          }
+          else {
+            elem.style.background = "red"
+          }
           
+      },
+      resetPhoto(elem) {
+        elem.style.background = ""
+        elem.style.backgroundImage = "";
+      },
+      setImage(elem){
+        elem.style.backgroundImage = "url('" + this.restaurant.img + "')"
       }
   }
 }
@@ -70,16 +73,22 @@ export default {
 
 
 <style>
-.photo {
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/10/Devanture_du_restaurant_H%C3%A9l%C3%A8ne_Darroze.jpg');
-}
 .phone-viewport {
-    width: 500px;
-    height: 500px;
+    width: 800px;
+    height: 800px;
     display: inline-flex;
     align-items: flex-end;
     overflow: hidden;
     border: 1px solid rgba(#000, .26);
     background: rgba(#000, .06);
+    background-size : 150%;
   }
+  .informarion{
+    font-size: 2em;
+  }
+  /*
+  .cadre {
+    max-width: 100%;
+    height: 100%;
+  }*/
 </style>
