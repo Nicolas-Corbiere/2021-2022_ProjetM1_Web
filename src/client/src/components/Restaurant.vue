@@ -43,7 +43,7 @@
     <div class="wrapper">
       <ejs-maps :zoomSettings="zoomSettings"  :centerPosition= 'centerPosition'>
         <e-layers>
-          <e-layer :layerType="layerType"> </e-layer>
+          <e-layer  :layerType="layerType" :markerSettings='markerSettings'></e-layer>
         </e-layers>
       </ejs-maps>
     </div>
@@ -53,7 +53,7 @@
 
 <script>
 import Vue from "vue";
-import { MapsPlugin /*, MapsComponent*/, Zoom } from "@syncfusion/ej2-vue-maps";
+import { MapsPlugin /*, MapsComponent*/, Zoom , Marker } from "@syncfusion/ej2-vue-maps";
 //import { world_map } from './world-map.js';
 Vue.use(MapsPlugin);
 
@@ -68,6 +68,8 @@ export default {
   data: function () {
     return {
       restaurant: null,
+
+      // -- Map
       zoomSettings: {
         enable: true,
         //toolBars: ["Zoom", "ZoomIn", "ZoomOut", "Pan", "Reset"],
@@ -78,10 +80,22 @@ export default {
           longitude: 0,
        },
       layerType: "OSM",
+
+      // -- Marker
+       markerSettings: [{
+        dataSource: [
+            { latitude: 0, longitude: 0, city: 'New York' }],
+        visible:true,
+        shape: 'Circle',
+        fill: 'white',
+        width: 25,
+        animationDuration:0,
+            border: { width: 2, color: '#333' }
+        }]
     };
   },
   provide: {
-    maps: [Zoom],
+    maps: [Marker,Zoom]
   },
   mounted() {
     console.log("Avant affichage, on pourra faire un fetch...");
@@ -94,13 +108,17 @@ export default {
       .then((data) => {
         console.log(data.restaurant)
         this.restaurant = data.restaurant;
-        this.centerPosition.latitude = this.restaurant.address.coord[0]
-        this.centerPosition.longitude = this.restaurant.address.coord[1]
-        console.log(this.centerPosition.latitude)
-        console.log(this.centerPosition.longitude)
+        this.setCoord(this.restaurant.address.coord[0],this.restaurant.address.coord[1])
       });
   },
   methods: {
+    setCoord(longi,lati) {
+        this.centerPosition.latitude = lati;
+        this.centerPosition.longitude = longi;
+        this.markerSettings[0].dataSource[0].latitude = lati;
+        this.markerSettings[0].dataSource[0].longitude = longi;
+        this.markerSettings[0].dataSource[0].city = this.restaurant.borough;
+    },
     changeBG(number) {
       let elem = document.getElementById("photo");
       this.resetPhoto(elem);
