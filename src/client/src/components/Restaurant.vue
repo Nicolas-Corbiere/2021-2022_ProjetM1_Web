@@ -8,9 +8,9 @@
 
     <div class="phone-viewport" id="photo" ref="photo" :style="{ backgroundImage: 'url(\'' + restaurant.img + '\')' }">
       <md-bottom-bar md-sync-route>
-        <md-bottom-bar-item @click="changeBG(1)" class="cadre" exact md-label="Image" md-icon="image" ></md-bottom-bar-item>
-        <md-bottom-bar-item @click="changeBG(2)" class="cadre"  md-label="Map" md-icon="map"></md-bottom-bar-item>
-        <md-bottom-bar-item @click="changeBG(3)" class="cadre"  md-label="Menu" md-icon="restaurant_menu"></md-bottom-bar-item>
+        <md-bottom-bar-item  @click="changeBG(1)" exact md-type="shift" md-label="Image" md-icon="image" style="max-width: 30%;min-width: 30%;"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="changeBG(2)" md-type="shift" md-label="Map" md-icon="map" style="max-width: 40%;min-width: 40%;"></md-bottom-bar-item>
+        <md-bottom-bar-item @click="changeBG(3)" md-type="shift"  md-label="Menu" md-icon="restaurant_menu" style="max-width: 30%;min-width: 30%;"></md-bottom-bar-item>
       </md-bottom-bar>
     </div>
 
@@ -86,9 +86,4 @@ export default {
   .informarion{
     font-size: 2em;
   }
-  /*
-  .cadre {
-    max-width: 100%;
-    height: 100%;
-  }*/
 </style>
