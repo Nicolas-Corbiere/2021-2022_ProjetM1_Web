@@ -84,7 +84,7 @@ export default {
         nbPagesTotal:0,
         msg:"",
         restauRecherche:"",
-        filtre:""
+        filtre:"name"
     }    
   },
   mounted() {
