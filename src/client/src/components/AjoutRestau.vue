@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Ajout d'un restaurant</h1>
+    <h2>{{msg}}</h2>
 
     <!--
     <form @submit.prevent="ajouterRestaurant($event)">
@@ -47,8 +48,8 @@
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100">
               <md-field>
-                <label for="ville">Ville</label>
-                <md-input name="ville" id="ville" v-model="form.ville" />
+                <label for="borough">Ville</label>
+                <md-input name="borough" id="borough" v-model="form.borough" />
               </md-field>
             </div>
           </div>
@@ -72,7 +73,7 @@ export default {
     form: {
       nom: "",
       cuisine: "",
-      ville: "",
+      borough: "",
     },
     msg: "",
   }),
@@ -84,7 +85,7 @@ export default {
       this.$reset();
       this.form.nom = "";
       this.form.cuisine = "";
-      this.form.ville = "";
+      this.form.borough = "";
     },
     ajouterRestaurant(event) {
       // Récupération du formulaire. Pas besoin de document.querySelector
@@ -115,7 +116,7 @@ export default {
 
       this.form.nom = "";
       this.form.cuisine = "";
-      this.form.ville = "";
+      this.form.borough = "";
     },
   },
 };

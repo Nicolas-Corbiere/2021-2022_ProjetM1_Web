@@ -209,6 +209,7 @@ function afficheRestaurantsEnTable(restaurants) {
         let restaurant = restaurants[i];
         let nom = restaurant.name;
         let cuisine = restaurant.cuisine;
+        let borough = restaurant.borough;
 
         let celluleNom = ligne.insertCell();
         celluleNom.innerHTML = nom;
@@ -217,6 +218,10 @@ function afficheRestaurantsEnTable(restaurants) {
         let celluleCuisine = ligne.insertCell();
         celluleCuisine.innerHTML = cuisine;
         celluleCuisine.id = "restaurant" + i + "Cuisine" ;
+        
+        let celluleVille = ligne.insertCell();
+        celluleVille.innerHTML = borough;
+        celluleVille.id = "restaurant" + i + "Borough" ;
 
         let celluleRemove = ligne.insertCell();
         celluleRemove.innerHTML = '<button id=' + restaurant._id + ' onclick="supprimerRestaurant(event);">Supprimer</button>';
@@ -252,13 +257,15 @@ function modifierRestaurant(noLigne) {
 
     let nom = document.querySelector("#restaurant" + noLigne + "Nom").textContent;
     let cuisine = document.querySelector("#restaurant" + noLigne + "Cuisine").textContent;
+    let borough = document.querySelector("#restaurant" + noLigne + "Ville").textContent;
 
-    console.log("modifier Restaurant id=" + id + "avec nom="+nom + " cusine= "+ cuisine);
+    console.log("modifier Restaurant id=" + id + "avec nom="+nom + " cusine= "+ cuisine + "ville="+ borough);
 
     // On remplit le formulaire
     let form = document.querySelector("#formulaireModification");
     form.nom.value = nom;
     form.cuisine.value = cuisine;
+    form.borough.value = borough;
     form._id.value = id;
 
 

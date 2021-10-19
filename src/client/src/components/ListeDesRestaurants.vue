@@ -40,10 +40,11 @@
             <md-button id="suivant" class="md-raised" :disabled="page===nbPagesTotal" @click="pageSuivante()">Page suivante</md-button>
             <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
 
-                <md-table-row>
+                <!--<md-table-row>
                     <md-table-head>Nom</md-table-head>
                     <md-table-head>Cuisine </md-table-head>
-                </md-table-row>
+                    <md-table-head>Ville </md-table-head>
+                </md-table-row>-->
 
                 <md-table-row  
                     slot="md-table-row" slot-scope="{ item, index }"
@@ -51,7 +52,7 @@
                     :class="{bordureRouge:(index === 2)}">   
                     <md-table-cell md-label="Name" md-sort-by="name">{{item.name}}</md-table-cell>
                     <md-table-cell md-label="Cuisine" md-sort-by="cuisine"> {{item.cuisine}}</md-table-cell>
-                    <md-table-cell md-label="ville" md-sort-by="Ville"> {{item.borough}}</md-table-cell>
+                    <md-table-cell md-label="Ville" md-sort-by="Ville"> {{item.borough}}</md-table-cell>
                     <md-table-cell md-label="Détails">
                         <router-link  :to="'/restaurant/' + item._id"><img id="details" src="../assets/details.png"></router-link>
                     </md-table-cell>
@@ -76,6 +77,7 @@ export default {
         restaurants: [],
         nom: '',
         cuisine: '',
+        borough: '',
         nbRestaurantsTotal:0,
         page:0,
         pagesize:10,
@@ -152,37 +154,6 @@ export default {
                 .catch(function (err) {
                     console.log(err);
                 });
-            },
-            ajouterRestaurant(event) {
-                // Récupération du formulaire. Pas besoin de document.querySelector
-                // ou document.getElementById puisque c'est le formulaire qui a généré
-                // l'événement
-                let form = event.target;
-
-                // Récupération des valeurs des champs du formulaire
-                // en prévision d'un envoi multipart en ajax/fetch
-                let donneesFormulaire = new FormData(form);
-
-                let url = "http://localhost:8080/api/restaurants";
-
-                fetch(url, {
-                    method: "POST",
-                    body: donneesFormulaire,
-                })
-                .then((responseJSON) => {
-                    responseJSON.json().then((resJS) => {
-                        // Maintenant res est un vrai objet JavaScript
-                        console.log(resJS.msg);
-                        this.msg = resJS.msg;
-                        //on rafraichi la vue
-                        this.getRestaurantsFromServer();
-                    });
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
-                this.nom = "";
-                this.cuisine = "";
             },
             getColor(index) {
                 return (index % 2) ? 'lightBlue' : 'pink';

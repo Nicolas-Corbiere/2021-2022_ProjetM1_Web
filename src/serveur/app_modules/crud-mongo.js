@@ -158,7 +158,8 @@ exports.createRestaurant = function(formData, callback) {
 	 
 			let toInsert = {
 				name : formData.nom, 
-				cuisine : formData.cuisine
+				cuisine : formData.cuisine,
+				borough : formData.borough
 			};
 			console.dir(JSON.stringify(toInsert));
 		    db.collection("restaurants")
@@ -203,7 +204,8 @@ exports.updateRestaurant = function(id, formData, callback) {
             let myquery = { "_id": ObjectId(id)};
 	        let newvalues = {
 	        	name : formData.nom, 
-	        	cuisine : formData.cuisine
+	        	cuisine : formData.cuisine,
+				borough : formData.borough
 	        };
 
 
