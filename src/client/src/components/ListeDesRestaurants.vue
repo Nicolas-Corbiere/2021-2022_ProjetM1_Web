@@ -3,6 +3,7 @@
         <div class="bloc">
 
             <h2>{{msg}}</h2>
+            <h2>restaurants.length</h2>
             <router-link  :to="'/'"><img src="../assets/miageLogo.png"></router-link>
             <div id="filtre">
                 <div class="md-layout md-gutter">
@@ -38,7 +39,7 @@
         <div class="bloc">
             <md-button id="precedent" class="md-raised" :disabled="page===0" @click="pagePrecedente()">Page précédente</md-button>
             <md-button id="suivant" class="md-raised" :disabled="page===nbPagesTotal" @click="pageSuivante()">Page suivante</md-button>
-            <md-table v-model="restaurants" md-sort="name" md-sort-order="asc">
+            <md-table v-if="restaurants.length>0" id="myTable" v-model="restaurants" md-sort="name" md-sort-order="asc">
 
                 <!--<md-table-row>
                     <md-table-head>Nom</md-table-head>
@@ -62,7 +63,7 @@
                 </md-table-row>
                 
             </md-table>
-            
+            <h2 v-else id="message">Aucun restaurant trouvé ...</h2>
         </div>
     </div>
                
@@ -217,5 +218,8 @@ a {
     padding-right:200px;
     height:100px;
     width:20px;
+}
+#message{
+    text-align:center;
 }
 </style>
