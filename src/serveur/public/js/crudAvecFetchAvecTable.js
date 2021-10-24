@@ -218,7 +218,7 @@ function afficheRestaurantsEnTable(restaurants) {
         let celluleCuisine = ligne.insertCell();
         celluleCuisine.innerHTML = cuisine;
         celluleCuisine.id = "restaurant" + i + "Cuisine" ;
-        
+
         let celluleVille = ligne.insertCell();
         celluleVille.innerHTML = borough;
         celluleVille.id = "restaurant" + i + "Borough" ;
@@ -265,10 +265,8 @@ function modifierRestaurant(noLigne) {
     let form = document.querySelector("#formulaireModification");
     form.nom.value = nom;
     form.cuisine.value = cuisine;
-    form.borough.value = borough;
     form._id.value = id;
-
-
+    form.borough.value = borough;
 
 }
 

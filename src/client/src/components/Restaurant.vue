@@ -145,13 +145,13 @@ export default {
 <style>
 .phone-viewport {
   width: 800px;
-  height: 800px;
+  height: 600px;
   display: inline-flex;
   align-items: flex-end;
   overflow: hidden;
   border: 1px solid rgba(#000, 0.26);
   background: rgba(#000, 0.06);
-  background-size: 150%;
+  background-size: 800px 700px;
 }
 .informarion {
   font-size: 2em;
