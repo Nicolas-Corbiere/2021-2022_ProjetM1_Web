@@ -2,7 +2,7 @@
   <div>
     <h1>Détail du restaurant qui a pour id : {{ id }}</h1>
 
-    <p class="informarion">
+    <p class="information">
       <b>Nom</b> : {{ restaurant.name }} &nbsp;&nbsp;&nbsp;&nbsp;
       <b> Cusine</b> : {{ restaurant.cuisine }} &nbsp;&nbsp;&nbsp;&nbsp;
       <b> Ville </b> : {{ restaurant.borough }}
@@ -14,7 +14,7 @@
       ref="photo"
       :style="{ backgroundImage: 'url(\'' + restaurant.img + '\')' }"
     >
-      <md-bottom-bar md-sync-route>
+      <!--<md-bottom-bar md-sync-route>
         <md-bottom-bar-item
           @click="changeBG(1)"
           exact
@@ -37,7 +37,7 @@
           md-icon="restaurant_menu"
           style="max-width: 30%; min-width: 30%"
         ></md-bottom-bar-item>
-      </md-bottom-bar>
+      </md-bottom-bar>-->
     </div>
 
     <div class="wrapper">
@@ -98,6 +98,7 @@ export default {
     maps: [Marker,Zoom]
   },
   mounted() {
+
     console.log("Avant affichage, on pourra faire un fetch...");
     console.log("ID = " + this.id);
     let url = "http://localhost:8080/api/restaurants/" + this.id;
@@ -109,9 +110,16 @@ export default {
         console.log(data.restaurant)
         this.restaurant = data.restaurant;
         this.setCoord(this.restaurant.address.coord[0],this.restaurant.address.coord[1])
+        this.setImg()
       });
   },
   methods: {
+    setImg(){
+      console.log(this.restaurant.img)
+      if(this.restaurant.img === undefined ) {
+        this.restaurant.img = 'https://upload.wikimedia.org/wikipedia/commons/1/10/Devanture_du_restaurant_H%C3%A9l%C3%A8ne_Darroze.jpg';
+      }
+    },
     setCoord(longi,lati) {
         this.centerPosition.latitude = lati;
         this.centerPosition.longitude = longi;
@@ -153,7 +161,7 @@ export default {
   background: rgba(#000, 0.06);
   background-size: 800px 700px;
 }
-.informarion {
+.information {
   font-size: 2em;
 }
 .wrapper {
