@@ -3,7 +3,6 @@
         <div class="bloc">
 
             <h2>{{msg}}</h2>
-            <h2>restaurants.length</h2>
             <router-link  :to="'/'"><img src="../assets/miageLogo.png"></router-link>
             <div id="filtre">
                 <div class="md-layout md-gutter">
@@ -63,7 +62,7 @@
                 </md-table-row>
                 
             </md-table>
-            <h2 v-else id="message">Aucun restaurant trouvé ...</h2>
+            <h2 v-else id="message">Aucun restaurant ne correspond à votre recherche</h2>
         </div>
     </div>
                
@@ -166,8 +165,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1{
-    text-align:center;
-    background-color:yellow;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 30px;
+  text-align:center;
+  letter-spacing: -2px;
+  border-bottom: 2px solid black;
+  text-transform: uppercase;
 }
 h3 {
   margin: 40px 0 0;

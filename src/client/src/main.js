@@ -4,6 +4,8 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import VueRouter from 'vue-router'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 import ListeDesRestaurants from './components/ListeDesRestaurants.vue'
 import HelloWorld from './components/HelloWorld.vue'
@@ -14,6 +16,7 @@ import AjoutRestau from './components/AjoutRestau.vue'
 Vue.config.productionTip = false
 Vue.use(VueMaterial)
 Vue.use(VueRouter)
+Vue.use(Vuetify)
 
 const router = new VueRouter({
   routes: [
@@ -41,6 +44,7 @@ const router = new VueRouter({
 })
 
 new Vue({
+  vuetify:new Vuetify(),
   router,
   render: h => h(App),
 }).$mount('#app')
