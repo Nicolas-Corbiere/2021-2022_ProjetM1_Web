@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <v-card class="overflow-hidden">
-    <v-app-bar absolute>
+    <v-app-bar 
+    absolute 
+    dark>
 
         <v-tabs align-with-title>
             <router-link tag="v-tab" to="/">Home</router-link>

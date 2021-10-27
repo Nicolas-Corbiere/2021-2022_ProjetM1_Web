@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Ajout d'un restaurant</h1>
     <h2>{{msg}}</h2>
 
     <!--
@@ -26,7 +25,7 @@
     >
       <md-card class="md-layout-item md-size-50 md-small-size-100">
         <md-card-header>
-          <div class="md-title">Restaurant</div>
+          <div class="md-title">Nouveau restaurant : </div>
         </md-card-header>
 
         <md-card-content>
