@@ -1,9 +1,21 @@
 <template>
   <div id="app">
-    <router-link tag="button" to="/">Home</router-link>
-    <router-link tag="button" to="/restaurant">Détail d'un restaurant</router-link>
-    <router-link tag="button" to="/hello">HelloWorld</router-link>
-    <router-link tag="button" to="/ajout">Ajouter un restaurant</router-link>    
+    <v-card class="overflow-hidden">
+    <v-app-bar absolute>
+
+        <v-tabs align-with-title>
+            <router-link tag="v-tab" to="/">Home</router-link>
+            <router-link tag="v-tab" to="/restaurant">Détail Restaurant</router-link>
+            <router-link tag="v-tab" to="/hello">Hello</router-link>
+            <router-link tag="v-tab" to="/ajout">Ajout Restaurant</router-link>
+        </v-tabs>
+
+        <v-btn icon>
+          <v-icon>mdi-heart</v-icon>
+        </v-btn>
+    </v-app-bar>
+    <v-container style="height: 80px;"></v-container>
+  </v-card>  
     <router-view></router-view>
   </div>
 </template>
