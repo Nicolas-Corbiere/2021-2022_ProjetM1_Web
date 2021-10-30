@@ -22,22 +22,28 @@
             
         </div>
         <div class="bloc">
+                <br><br>
             <h1>Nombre de restaurants : {{nbRestaurantsTotal}}</h1>
-        
-            <p>Nb de pages total : {{nbPagesTotal}}</p>
-            <p>Nb restaurants par page : 
-                <input 
-                    @change="getRestaurantsFromServer()"
-                    type="range"  min=2 max=1000 v-model="pagesize"
-                >{{pagesize}}
-            </p>
-
-            &nbsp;Page courante : {{page}}
             <br>
-        </div>
-        <div class="bloc">
-            <md-button id="precedent" class="md-raised" :disabled="page===0" @click="pagePrecedente()">Page précédente</md-button>
-            <md-button id="suivant" class="md-raised" :disabled="page===nbPagesTotal" @click="pageSuivante()">Page suivante</md-button>
+            <div class="container">
+                <p>Nb de pages total : {{nbPagesTotal}}</p>
+                <p>Nb restaurants par page : 
+                    <input 
+                        @change="getRestaurantsFromServer()"
+                        type="range"  min=2 max=500 v-model="pagesize"
+                    >{{pagesize}}
+                </p>
+            </div>
+            <br>
+  
+            <div class="container">
+                <md-button class="md-raised page2" :disabled="page===0" @click="firstPage()">Page 0</md-button>
+                <md-button class="md-raised page" :disabled="page===0" @click="pagePrecedente()">Page précédente</md-button>
+                <p>Page courante : {{page}}</p>
+                <md-button class="md-raised page" :disabled="page===nbPagesTotal" @click="pageSuivante()">Page suivante</md-button>
+                <md-button class="md-raised page2" :disabled="page===nbPagesTotal" @click="lastPage()">Page {{nbPagesTotal}}</md-button>
+            </div>    
+            <br><br><br>
             <md-table v-if="restaurants.length>0" id="myTable" v-model="restaurants" md-sort="name" md-sort-order="asc">
 
                 <!--<md-table-row>
@@ -84,7 +90,7 @@ export default {
         nbPagesTotal:0,
         msg:"",
         restauRecherche:"",
-        filtre:"name"
+        filtre:"name",
     }    
   },
   mounted() {
@@ -92,14 +98,27 @@ export default {
             this.getRestaurantsFromServer();
         },
         methods: {
+            firstPage() {
+               if(this.page === 0) return;
+                this.page = 0;
+                this.getRestaurantsFromServer();
+            },
             pagePrecedente() {
                 if(this.page === 0) return;
                 this.page--;
                 this.getRestaurantsFromServer();
             },
             pageSuivante() {
-                if(this.page === this.dernierePage) return;
+                if(this.page === this.nbPagesTotal) return;
                 this.page++;
+                this.getRestaurantsFromServer();
+            },
+            lastPage() {
+                if(this.page === this.nbPagesTotal) return;
+                console.log(this.page);
+                console.log(this.nbPagesTotal);
+                this.page = this.nbPagesTotal;
+                console.log(this.page);
                 this.getRestaurantsFromServer();
             },
             getRestaurantsFromServer() {
@@ -168,8 +187,6 @@ h1{
   font-family: "Trebuchet MS", sans-serif;
   font-size: 30px;
   text-align:center;
-  letter-spacing: -2px;
-  border-bottom: 2px solid black;
   text-transform: uppercase;
 }
 h3 {
@@ -187,6 +204,10 @@ a {
   color: #42b983;
 }
 
+input{
+ border: 3px black solid;
+}
+
 #delete{
     height:20px;
     width:20px;
@@ -194,16 +215,6 @@ a {
 #details{
     height:20px;
     width:20px;
-}
-#precedent{
-    float:left;
-    margin-left:100px;
-    border: 2px solid black;
-}
-#suivant{
-    float:right;
-    margin-right:100px;
-    border: 2px solid black;
 }
 
 #search{
@@ -224,5 +235,28 @@ a {
 }
 #message{
     text-align:center;
+}
+
+.container {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: .5em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page{
+    border:3px black solid;
+    width:300px;
+}
+
+.page2{
+    border:3px black solid;
+    width:10px;
+}
+
+p{
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 30px;
 }
 </style>
