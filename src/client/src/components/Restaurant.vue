@@ -54,6 +54,7 @@
 <script>
 import Vue from "vue";
 import { MapsPlugin /*, MapsComponent*/, Zoom , Marker } from "@syncfusion/ej2-vue-maps";
+import { Menu } from "../../public/js/Menu";
 //import { world_map } from './world-map.js';
 Vue.use(MapsPlugin);
 
@@ -67,8 +68,9 @@ export default {
   },
   data: function () {
     return {
+      // -- Restaurant
       restaurant: null,
-
+      menu: null,
       // -- Map
       zoomSettings: {
         enable: true,
@@ -111,6 +113,7 @@ export default {
         this.restaurant = data.restaurant;
         this.setCoord(this.restaurant.address.coord[0],this.restaurant.address.coord[1])
         this.setImg()
+        this.menu = new Menu();
       });
   },
   methods: {
