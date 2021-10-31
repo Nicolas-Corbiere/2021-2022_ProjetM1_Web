@@ -35,11 +35,8 @@ export class Menu {
     dessert = null;
 
     constructor() {
-      console.log("Entree")
       this.entree = this.getCarteRandom(this.type[0]);
-      console.log("Plat")
       this.plat = this.getCarteRandom(this.type[1]);
-      console.log("Dessert")
       this.dessert = this.getCarteRandom(this.type[2]);
     }
   
@@ -59,7 +56,6 @@ export class Menu {
     }  
     arrIndex.forEach(indexe => {
       let elem = this.getElem(indexe,typeSelect);
-      console.log(elem)
       carte.push(elem);
     });    
 
@@ -88,6 +84,22 @@ export class Menu {
     if(typeSelect == this.type[2]) {
       return this.carteDessert[indexe]
     }
+  }
+
+  getEntree() {
+    return this.entree;
+  }
+
+  getPlat() {
+    return this.plat;
+  }
+
+  getDessert() {
+    return this.dessert;
+  }
+
+  getmin() {
+    return this.minTaille;
   }
 }
 

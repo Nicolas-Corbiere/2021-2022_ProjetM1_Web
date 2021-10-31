@@ -1,12 +1,15 @@
 <template>
   <div>
+    <br>
     <h1>Détail du restaurant qui a pour id : {{ id }}</h1>
-
+    <br>
     <p class="information">
       <b>Nom</b> : {{ restaurant.name }} &nbsp;&nbsp;&nbsp;&nbsp;
       <b> Cusine</b> : {{ restaurant.cuisine }} &nbsp;&nbsp;&nbsp;&nbsp;
       <b> Ville </b> : {{ restaurant.borough }}
     </p>
+    <br>
+    <br>  
 
     <div
       class="phone-viewport"
@@ -47,6 +50,51 @@
         </e-layers>
       </ejs-maps>
     </div>
+    <br>
+      <table>
+      <tr>
+        <h2>Entree</h2>
+      </tr>
+      <tbody>
+        <tr v-for="value in entree"
+        v-bind:item="value"
+        v-bind:index="value"
+        v-bind:key="value">
+          <td> {{ value }} </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <table>
+      <tr>
+        <h2>Plat </h2>
+      </tr>
+      <tbody>
+        <tr v-for="value in plat"
+        v-bind:item="value"
+        v-bind:index="value"
+        v-bind:key="value">
+          <td> {{ value }} </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <table>
+      <tr>
+        <h2>Dessert</h2> 
+      </tr>
+      <tbody>
+        <tr v-for="value in dessert"
+        v-bind:item="value"
+        v-bind:index="value"
+        v-bind:key="value">
+          <td> {{ value }} </td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+
   </div>
 </template>
 
@@ -70,7 +118,12 @@ export default {
     return {
       // -- Restaurant
       restaurant: null,
-      menu: null,
+
+      // -- Menue 
+      entree:null,
+      plat:null,
+      desesrt:null,
+
       // -- Map
       zoomSettings: {
         enable: true,
@@ -113,7 +166,14 @@ export default {
         this.restaurant = data.restaurant;
         this.setCoord(this.restaurant.address.coord[0],this.restaurant.address.coord[1])
         this.setImg()
-        this.menu = new Menu();
+        let menue = new Menu();
+        this.entree = menue.getEntree();
+        this.plat = menue.getPlat();
+        this.dessert = menue.getDessert();
+
+        console.log(this.entree)
+        console.log(this.plat)
+        console.log(this.dessert)
       });
   },
   methods: {
