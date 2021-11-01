@@ -1,14 +1,14 @@
 <template>
       <div class="center">
         <br>
-        <br>
 
-        <p class="information">
-          <b>Nom</b> : {{ restaurant.name }} &nbsp;&nbsp;&nbsp;&nbsp;
-          <b> Cusine</b> : {{ restaurant.cuisine }} &nbsp;&nbsp;&nbsp;&nbsp;
-          <b> Ville </b> : {{ restaurant.borough }}
-        </p>
-
+        <ul class="information">
+          <li> <b>Nom</b> : {{ restaurant.name }} <br><br> </li>
+          <li> <b> Cusine</b> : {{ restaurant.cuisine }} <br><br> </li>
+          <li> <b> Ville </b> : {{ restaurant.borough }} <br><br> </li>
+        </ul>   
+        
+        
 
         <!--IMAGE-->
         <div id="photo" class="center" style="display:none">
@@ -233,6 +233,7 @@ export default {
   background-size: 800px 700px;
 }
 .information {
+  margin-left:1em ;
   font-size: 2em;
 }
 .wrapper {
