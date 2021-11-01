@@ -12,8 +12,9 @@
 
         <!--IMAGE-->
         <div id="photo" class="center" style="display:none">
-          <v-img
-            height="400"
+          <v-img class="center"
+            height="450"
+            width="800"
             :src="`${restaurant.img}`">
           </v-img>
         </div>
@@ -261,12 +262,12 @@ export default {
 
 .center{
   margin: 0 auto;
-  width: 700px; 
-  height:470px;
+  width: 500px; 
+  height:450px;
 }
 
 #bottomBar{
   margin: 0 auto;
-  width: 700px; 
+  width: 500px; 
 }
 </style>
