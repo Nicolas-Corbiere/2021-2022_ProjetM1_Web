@@ -7,8 +7,6 @@
 
         <v-tabs align-with-title>
             <router-link tag="v-tab" to="/">Home</router-link>
-            <router-link tag="v-tab" to="/restaurant">Détail Restaurant</router-link>
-            <router-link tag="v-tab" to="/hello">Hello</router-link>
             <router-link tag="v-tab" to="/ajout">Ajout Restaurant</router-link>
         </v-tabs>
 

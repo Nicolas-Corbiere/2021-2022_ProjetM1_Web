@@ -37,8 +37,8 @@
             <br>
   
             <div class="container">
-                <md-button class="md-raised page2" :disabled="page===0" @click="firstPage()">Page 0</md-button>
-                <md-button class="md-raised page" :disabled="page===0" @click="pagePrecedente()">Page précédente</md-button>
+                <md-button class="md-raised page2" :disabled="page===1" @click="firstPage()">Page 1</md-button>
+                <md-button class="md-raised page" :disabled="page===1" @click="pagePrecedente()">Page précédente</md-button>
                 <p>Page courante : {{page}}</p>
                 <md-button class="md-raised page" :disabled="page===nbPagesTotal" @click="pageSuivante()">Page suivante</md-button>
                 <md-button class="md-raised page2" :disabled="page===nbPagesTotal" @click="lastPage()">Page {{nbPagesTotal}}</md-button>
@@ -85,9 +85,9 @@ export default {
         cuisine: '',
         borough: '',
         nbRestaurantsTotal:0,
-        page:0,
+        page:1,
         pagesize:10,
-        nbPagesTotal:0,
+        nbPagesTotal:1,
         msg:"",
         restauRecherche:"",
         filtre:"name",
@@ -99,12 +99,12 @@ export default {
         },
         methods: {
             firstPage() {
-               if(this.page === 0) return;
-                this.page = 0;
+               if(this.page === 1) return;
+                this.page = 1;
                 this.getRestaurantsFromServer();
             },
             pagePrecedente() {
-                if(this.page === 0) return;
+                if(this.page === 1) return;
                 this.page--;
                 this.getRestaurantsFromServer();
             },
@@ -115,10 +115,7 @@ export default {
             },
             lastPage() {
                 if(this.page === this.nbPagesTotal) return;
-                console.log(this.page);
-                console.log(this.nbPagesTotal);
                 this.page = this.nbPagesTotal;
-                console.log(this.page);
                 this.getRestaurantsFromServer();
             },
             getRestaurantsFromServer() {

@@ -1,5 +1,7 @@
 <template>
-  <div>
+   
+  <div class="center">
+   <br><br><br>
     <h2>{{msg}}</h2>
 
     <!--
@@ -23,7 +25,7 @@
       @submit.prevent="ajouterRestaurant($event)"
       autocomplete="off"
     >
-      <md-card class="md-layout-item md-size-50 md-small-size-100">
+      <md-card class="md-layout-item">
         <md-card-header>
           <div class="md-title">Nouveau restaurant : </div>
         </md-card-header>
@@ -127,5 +129,10 @@ export default {
   top: 0;
   right: 0;
   left: 0;
+}
+
+.center{
+  margin: 0 auto;
+  width:1200px;
 }
 </style>
