@@ -1,5 +1,5 @@
 <template>
-      <div class="center" style="border:2px black solid">
+      <div class="center">
         <!--IMAGE-->
         <div id="photo" class="center" style="display:none">
           <v-img
@@ -61,7 +61,7 @@
             </table>
           </div>
         </div>
-        <md-bottom-bar class="center">
+        <md-bottom-bar class="bottomBar">
           <md-bottom-bar-item
             @click="changeBG(1)"
             md-label="Map"
@@ -82,16 +82,6 @@
           ></md-bottom-bar-item>
         </md-bottom-bar>
       </div>
-
-        
-      <!--<div id="map" class="wrapper" style="display:none">
-      <ejs-maps :zoomSettings="zoomSettings"  :centerPosition= 'centerPosition'>
-        <e-layers>
-          <e-layer  :layerType="layerType" :markerSettings='markerSettings'></e-layer>
-        </e-layers>
-      </ejs-maps>
-    </div>-->
-
 </template>
 
 
@@ -259,6 +249,12 @@ export default {
 }
 
 .center{
+  margin: 0 auto;
+  width: 700px; 
+  height:470px;
+}
+
+#bottomBar{
   margin: 0 auto;
   width: 700px; 
 }
