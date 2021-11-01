@@ -25,6 +25,8 @@ Pour importer notre base de données :
 Aller dans le répertoire /documentation/DB/ 
 lancer la commande suivante : 
 ```console
+2021-2022_ProjetM1_Web/documentation/DB/ :~$ mongoimport --db test -c restaurants --file restaurantMongoDB.json
+
 ...:~$ mongoimport --db test -c restaurants --file restaurantMongoDB.json
 ```
 voir plus : https://www.digitalocean.com/community/tutorials/how-to-import-and-export-a-mongodb-database-on-ubuntu-20-04-fr
