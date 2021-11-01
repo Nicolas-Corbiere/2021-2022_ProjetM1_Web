@@ -1,5 +1,15 @@
 <template>
       <div class="center">
+        <br>
+        <br>
+
+        <p class="information">
+          <b>Nom</b> : {{ restaurant.name }} &nbsp;&nbsp;&nbsp;&nbsp;
+          <b> Cusine</b> : {{ restaurant.cuisine }} &nbsp;&nbsp;&nbsp;&nbsp;
+          <b> Ville </b> : {{ restaurant.borough }}
+        </p>
+
+
         <!--IMAGE-->
         <div id="photo" class="center" style="display:none">
           <v-img
