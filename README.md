@@ -24,11 +24,43 @@ Pour importer notre base de donnée :
 Aller dans le repertoire /documentation/DB/
 lancer la commande suivante : 
 ```console
-...:~$ mongoimport --db newdb -c restaurants --file primer-dataset.json
-foo
+...:~$ mongoimport --db test -c restaurants --file restaurantMongoDB.json
 ```
 voir plus : https://www.digitalocean.com/community/tutorials/how-to-import-and-export-a-mongodb-database-on-ubuntu-20-04-fr
 
 ### Instalation de node
+Installer ensuite les node-module :
+
+```console
+2021-2022_ProjetM1_Web/:~$ cd src/ code .
+```
+Dans VirtualStudiotCode, ouvrir deux terminaux :
+
+```console
+
+2021-2022_ProjetM1_Web/src/:~$ cd server
+2021-2022_ProjetM1_Web/src/server:~$ npm install
+```
+
+```console
+2021-2022_ProjetM1_Web/src/:~$ cd client
+2021-2022_ProjetM1_Web/src/client:~$ npm install
+```
 
 ### Démarrage de l'application
+Garder les deuc terminaux ouvert et faire les commande suivante :
+
+```console
+2021-2022_ProjetM1_Web/src/server:~$ node ./serverCrudWithMongo.js
+```
+
+```console
+2021-2022_ProjetM1_Web/src/client:~$ npm run serve
+```
+
+Vous pouvez maintennant lancer votre navigateur a l'URL suivante :
+http://localhost:8081
+
+
+
+
