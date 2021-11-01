@@ -33,7 +33,8 @@ voir plus : https://www.digitalocean.com/community/tutorials/how-to-import-and-e
 Installer ensuite les node_module :
 
 ```console
-2021-2022_ProjetM1_Web/:~$ cd src/ code .
+2021-2022_ProjetM1_Web/:~$ cd src/
+2021-2022_ProjetM1_Web/src/:~$ code .
 ```
 Dans Virtual Studio Code, ouvrir deux terminaux :
 
