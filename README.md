@@ -14,6 +14,10 @@ Nous avons aussi ajouté une map montrant sa position et la carte du restaurant 
 ## Particularité du projet
 
 Nous avons ajouté une option de filtrage par nom, mais aussi par cuisine et ville.
+L'utilisateur peut rajouter un restaurant en incluant le nom, la cuisine, mais aussi la ville.
+
+## Video de présentation
+https://youtu.be/PlRHfLBtLb0
 
 ## lancer le projet :
 
