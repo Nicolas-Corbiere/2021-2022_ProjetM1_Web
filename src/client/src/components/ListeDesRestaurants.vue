@@ -85,7 +85,7 @@ export default {
         cuisine: '',
         borough: '',
         nbRestaurantsTotal:0,
-        page:1,
+        page:0,
         pagesize:10,
         nbPagesTotal:1,
         msg:"",
