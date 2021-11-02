@@ -3,7 +3,7 @@
   <div class="center">
    <br><br><br>
     <h2>{{msg}}</h2>
-
+    <br>
     <!--
     <form @submit.prevent="ajouterRestaurant($event)">
       <label>
@@ -108,7 +108,13 @@ export default {
           responseJSON.json().then((resJS) => {
             // Maintenant res est un vrai objet JavaScript
             console.log(resJS.msg);
-            this.msg = resJS.msg;
+            let index = resJS.msg.indexOf("réussi");    
+            if(index !== -1){
+                this.msg = "Votre nouveau restaurant a été ajouté avec succès !";
+            } else{
+                this.msg = "L'ajout du nouveau restaurant a échoué ...";
+            }
+            
           });
         })
         .catch(function (err) {

@@ -4,15 +4,10 @@
     <v-app-bar 
     absolute 
     dark>
-
         <v-tabs align-with-title>
             <router-link tag="v-tab" to="/">Home</router-link>
             <router-link tag="v-tab" to="/ajout">Ajout Restaurant</router-link>
         </v-tabs>
-
-        <v-btn icon>
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
     </v-app-bar>
     <v-container style="height: 80px;"></v-container>
   </v-card>  

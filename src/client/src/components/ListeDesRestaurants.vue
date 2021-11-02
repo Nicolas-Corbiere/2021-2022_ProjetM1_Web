@@ -2,7 +2,6 @@
     <div class="bloc">
         <div class="bloc">
 
-            <h2>{{msg}}</h2>
             <router-link  :to="'/'"><img src="../assets/miageLogo.png"></router-link>
             <div id="filtre">
                 <div class="md-layout md-gutter">
@@ -37,14 +36,16 @@
             <br>
   
             <div class="container">
-                <md-button class="md-raised page2" :disabled="page===0" @click="firstPage()">Page 0</md-button>
-                <md-button class="md-raised page" :disabled="page===0" @click="pagePrecedente()">Page précédente</md-button>
+                <md-button class="md-raised page2" :disabled="page===0 || nbRestaurantsTotal==0" @click="firstPage()">Page 0</md-button>
+                <md-button class="md-raised page" :disabled="page===0 || nbRestaurantsTotal==0" @click="pagePrecedente()">Page précédente</md-button>
                 <p>Page courante : {{page}}</p>
-                <md-button class="md-raised page" :disabled="page===nbPagesTotal" @click="pageSuivante()">Page suivante</md-button>
-                <md-button class="md-raised page2" :disabled="page===nbPagesTotal" @click="lastPage()">Page {{nbPagesTotal}}</md-button>
+                <md-button class="md-raised page" :disabled="page===nbPagesTotal-1 || nbRestaurantsTotal<=10" @click="pageSuivante()">Page suivante</md-button>
+                <md-button class="md-raised page2" :disabled="page===nbPagesTotal-1 || nbRestaurantsTotal<=10" @click="lastPage()">Page {{nbPagesTotal}}</md-button>
             </div>    
-            <br><br><br>
-            <md-table v-if="restaurants.length>0" id="myTable" v-model="restaurants" md-sort="name" md-sort-order="asc">
+            <br><br>
+            <h2>{{msg}}</h2>
+            <br>
+            <md-table v-if="nbRestaurantsTotal>0" id="myTable" v-model="restaurants" md-sort="name" md-sort-order="asc">
 
                 <!--<md-table-row>
                     <md-table-head>Nom</md-table-head>
@@ -115,7 +116,7 @@ export default {
             },
             lastPage() {
                 if(this.page === this.nbPagesTotal) return;
-                this.page = this.nbPagesTotal;
+                this.page = this.nbPagesTotal-1;
                 this.getRestaurantsFromServer();
             },
             getRestaurantsFromServer() {
@@ -142,7 +143,10 @@ export default {
                             // Maintenant res est un vrai objet JavaScript
                             this.restaurants = resJS.data;
                             this.nbRestaurantsTotal = resJS.count;
-                            this.nbPagesTotal = Math.round(this.nbRestaurantsTotal / this.pagesize) -1;
+                            console.log(this.nbRestaurantsTotal);
+                            console.log(this.pagesize);
+                            console.log(Math.round(this.nbRestaurantsTotal / this.pagesize));
+                            this.nbPagesTotal = Math.round(this.nbRestaurantsTotal / this.pagesize);
                         });
                     })
                     .catch(function (err) {
@@ -162,7 +166,12 @@ export default {
                     responseJSON.json().then((resJS) => {
                         // Maintenant res est un vrai objet JavaScript
                         console.log(resJS.msg);
-                        this.msg = resJS.msg;
+                        let index = resJS.msg.indexOf("réussie");    
+                        if(index !== -1){
+                            this.msg = "Le restaurant a été supprimé avec succès !";
+                        } else{
+                            this.msg = "La suppression du restaurant a échoué ...";
+                        }
                         //on rafraichi la vue
                         this.getRestaurantsFromServer();
                     });
