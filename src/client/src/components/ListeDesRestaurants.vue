@@ -40,7 +40,7 @@
                 <md-button class="md-raised page" :disabled="page===0 || nbRestaurantsTotal==0" @click="pagePrecedente()">Page précédente</md-button>
                 <p>Page courante : {{page}}</p>
                 <md-button class="md-raised page" :disabled="page===nbPagesTotal-1 || nbRestaurantsTotal<=10" @click="pageSuivante()">Page suivante</md-button>
-                <md-button class="md-raised page2" :disabled="page===nbPagesTotal-1 || nbRestaurantsTotal<=10" @click="lastPage()">Page {{nbPagesTotal}}</md-button>
+                <md-button class="md-raised page2" :disabled="page===nbPagesTotal-1 || nbRestaurantsTotal<=10" @click="lastPage()">Page {{nbPagesTotal-1}}</md-button>
             </div>    
             <br><br>
             <h2>{{msg}}</h2>
@@ -146,7 +146,7 @@ export default {
                             console.log(this.nbRestaurantsTotal);
                             console.log(this.pagesize);
                             console.log(Math.round(this.nbRestaurantsTotal / this.pagesize));
-                            this.nbPagesTotal = Math.round(this.nbRestaurantsTotal / this.pagesize);
+                            this.nbPagesTotal = Math.ceil(this.nbRestaurantsTotal / this.pagesize);
                         });
                     })
                     .catch(function (err) {
