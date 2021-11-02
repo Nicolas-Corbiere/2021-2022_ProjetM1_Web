@@ -37,8 +37,8 @@
             <br>
   
             <div class="container">
-                <md-button class="md-raised page2" :disabled="page===1" @click="firstPage()">Page 1</md-button>
-                <md-button class="md-raised page" :disabled="page===1" @click="pagePrecedente()">Page précédente</md-button>
+                <md-button class="md-raised page2" :disabled="page===0" @click="firstPage()">Page 0</md-button>
+                <md-button class="md-raised page" :disabled="page===0" @click="pagePrecedente()">Page précédente</md-button>
                 <p>Page courante : {{page}}</p>
                 <md-button class="md-raised page" :disabled="page===nbPagesTotal" @click="pageSuivante()">Page suivante</md-button>
                 <md-button class="md-raised page2" :disabled="page===nbPagesTotal" @click="lastPage()">Page {{nbPagesTotal}}</md-button>
@@ -87,7 +87,7 @@ export default {
         nbRestaurantsTotal:0,
         page:0,
         pagesize:10,
-        nbPagesTotal:1,
+        nbPagesTotal:0,
         msg:"",
         restauRecherche:"",
         filtre:"name",
@@ -99,12 +99,12 @@ export default {
         },
         methods: {
             firstPage() {
-               if(this.page === 1) return;
-                this.page = 1;
+               if(this.page === 0) return;
+                this.page = 0;
                 this.getRestaurantsFromServer();
             },
             pagePrecedente() {
-                if(this.page === 1) return;
+                if(this.page === 0) return;
                 this.page--;
                 this.getRestaurantsFromServer();
             },
@@ -142,7 +142,7 @@ export default {
                             // Maintenant res est un vrai objet JavaScript
                             this.restaurants = resJS.data;
                             this.nbRestaurantsTotal = resJS.count;
-                            this.nbPagesTotal = Math.round(this.nbRestaurantsTotal / this.pagesize);
+                            this.nbPagesTotal = Math.round(this.nbRestaurantsTotal / this.pagesize) -1;
                         });
                     })
                     .catch(function (err) {
