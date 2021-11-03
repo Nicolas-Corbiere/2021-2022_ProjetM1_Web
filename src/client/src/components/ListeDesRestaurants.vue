@@ -154,7 +154,8 @@ export default {
                 });
             },
             chercherRestaurants: _.debounce(function() {
-                    this.getRestaurantsFromServer();
+                this.page=0;
+                this.getRestaurantsFromServer();
             }, 300),
             supprimerRestaurant(r) {
                 let url = "http://localhost:8080/api/restaurants/" + r._id;
