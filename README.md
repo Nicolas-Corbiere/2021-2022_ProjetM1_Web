@@ -33,7 +33,7 @@ lancer la commande suivante :
 ```
 voir plus : https://www.digitalocean.com/community/tutorials/how-to-import-and-export-a-mongodb-database-on-ubuntu-20-04-fr
 
-### Instalation de node
+### Installation de node
 Installer ensuite les node_module :
 
 ```console
